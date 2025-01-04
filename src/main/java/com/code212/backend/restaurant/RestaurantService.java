@@ -22,7 +22,8 @@ public class RestaurantService {
         Restaurant newRestaurant = restaurantMapper.toRestaurant(restaurantRequest);
 
         newRestaurant.setDateCreation(LocalDateTime.now());
-        return restaurantMapper.toRestaurantResponse(newRestaurant);
+        Restaurant savedRestaurant = restaurantRepository.save(newRestaurant);
+        return restaurantMapper.toRestaurantResponse(savedRestaurant);
     }
 
     public RestaurantResponse getRestaurantById(Integer id){
