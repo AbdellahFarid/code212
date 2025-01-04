@@ -1,48 +1,53 @@
 package com.code212.backend.restaurant;
 
+import com.code212.backend.restaurant.dto.RestaurantRequest;
+import com.code212.backend.restaurant.dto.RestaurantResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final RestaurantMapper restaurantMapper;
 
-    public Restaurant createRestaurant(Restaurant restaurant){
+    public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest){
 
-        Restaurant newRestaurant = new Restaurant();
+        Restaurant newRestaurant = restaurantMapper.toRestaurant(restaurantRequest);
 
-        newRestaurant.setNom(restaurant.getNom());
-        newRestaurant.setLatitude(restaurant.getLatitude());
-        newRestaurant.setLongitude(restaurant.getLongitude());
         newRestaurant.setDateCreation(LocalDateTime.now());
-
-        return restaurantRepository.save(newRestaurant);
+        return restaurantMapper.toRestaurantResponse(newRestaurant);
     }
 
-    public Restaurant getRestaurantById(Integer id){
+    public RestaurantResponse getRestaurantById(Integer id){
 
-        return restaurantRepository.findById(id).
+        Restaurant restaurant = restaurantRepository.findById(id).
                 orElseThrow(() -> new EntityNotFoundException("Restaurant Not Found"));
+        return restaurantMapper.toRestaurantResponse(restaurant);
     }
 
-    public Restaurant getRestaurantByName(String name){
+    public RestaurantResponse getRestaurantByName(String name){
 
-        return restaurantRepository.findByNom(name).
+        Restaurant restaurant = restaurantRepository.findByNom(name).
                 orElseThrow(() -> new EntityNotFoundException("Restaurant Not Found"));
+        return restaurantMapper.toRestaurantResponse(restaurant);
     }
 
-    public List<Restaurant> getAllRestaurants(){
+    public List<RestaurantResponse> getAllRestaurants(){
 
-        return restaurantRepository.findAll();
+        return restaurantRepository.findAll()
+                .stream()
+                .map((restaurantMapper::toRestaurantResponse))
+                .toList();
     }
 
-    public Restaurant updateRestaurant(Integer id, Restaurant updatedRestaurant){
+    public RestaurantResponse updateRestaurant(Integer id, Restaurant updatedRestaurant){
 
         Restaurant restaurant = restaurantRepository.findById(id).
                 orElseThrow(() -> new EntityNotFoundException("Restaurant Not Found"));
@@ -58,7 +63,7 @@ public class RestaurantService {
             restaurant.setDateCreation(updatedRestaurant.getDateCreation());
         }
 
-        return restaurantRepository.save(restaurant);
+        return restaurantMapper.toRestaurantResponse(restaurant);
     }
 
     public void deleteRestaurant(Integer id){
