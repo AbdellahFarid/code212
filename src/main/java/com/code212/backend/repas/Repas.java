@@ -1,5 +1,6 @@
 package com.code212.backend.repas;
 
+import com.code212.backend.restaurant.Restaurant;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,7 @@ public class Repas {
     private Integer id;
     private String name;
     private Double price;
+    @ManyToOne
+    @JoinColumn(name = "restaurant")
+    private Restaurant restaurant;
 }

@@ -1,7 +1,5 @@
 package com.code212.backend.zone;
 
-
-import com.code212.backend.specialite.Specialite;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
