@@ -19,6 +19,6 @@ public class Ville {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "ville")
+    @OneToMany(mappedBy = "ville", cascade = { CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Zone> zones;
 }

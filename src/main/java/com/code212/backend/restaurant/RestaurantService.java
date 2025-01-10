@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +19,10 @@ public class RestaurantService {
     public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest){
 
         Restaurant newRestaurant = restaurantMapper.toRestaurant(restaurantRequest);
-
+        System.out.println(newRestaurant.getNom());
         newRestaurant.setDateCreation(LocalDateTime.now());
         Restaurant savedRestaurant = restaurantRepository.save(newRestaurant);
+        System.out.println(savedRestaurant);
         return restaurantMapper.toRestaurantResponse(savedRestaurant);
     }
 

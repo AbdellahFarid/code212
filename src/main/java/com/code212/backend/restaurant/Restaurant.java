@@ -8,8 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,13 +28,16 @@ public class Restaurant {
     private String nom;
     private Double latitude;
     private Double longitude;
+
+    @CreationTimestamp
     private LocalDateTime dateCreation;
-    @ManyToOne
-    @JoinColumn(name = "zone")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "zone", nullable = false)
     private Zone zone;
 
-    @OneToMany(mappedBy = "restaurant")
-    private List<Repas> repas;
+    @OneToMany(mappedBy = "restaurant", cascade = { CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private List<Repas> repas = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -41,4 +46,18 @@ public class Restaurant {
             inverseJoinColumns = @JoinColumn(name = "specialite_id")
     )
     private List<Specialite> specialites;
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", dateCreation=" + dateCreation +
+                ", zone=" + zone +
+                ", repas=" + repas +
+                ", specialites=" + specialites +
+                '}';
+    }
 }
