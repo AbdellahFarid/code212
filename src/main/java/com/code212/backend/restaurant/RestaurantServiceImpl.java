@@ -1,28 +1,29 @@
 package com.code212.backend.restaurant;
 
+import com.code212.backend.repas.Repas;
 import com.code212.backend.restaurant.dto.RestaurantRequest;
 import com.code212.backend.restaurant.dto.RestaurantResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RestaurantService {
+public class RestaurantServiceImpl {
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMapper restaurantMapper;
 
     public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest){
 
+        List<Repas> repasList = new ArrayList<>();
+
         Restaurant newRestaurant = restaurantMapper.toRestaurant(restaurantRequest);
-        System.out.println(newRestaurant.getNom());
-        newRestaurant.setDateCreation(LocalDateTime.now());
+        newRestaurant.setRepas(repasList);
         Restaurant savedRestaurant = restaurantRepository.save(newRestaurant);
-        System.out.println(savedRestaurant);
         return restaurantMapper.toRestaurantResponse(savedRestaurant);
     }
 

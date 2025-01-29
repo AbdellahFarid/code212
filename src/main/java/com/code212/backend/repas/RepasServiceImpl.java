@@ -1,16 +1,13 @@
 package com.code212.backend.repas;
 
-import com.code212.backend.restaurant.Restaurant;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RepasService {
+public class RepasServiceImpl {
 
     private final RepasRepository repasRepository;
 

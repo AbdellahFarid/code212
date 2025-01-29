@@ -1,6 +1,5 @@
 package com.code212.backend.ville;
 
-import com.code212.backend.specialite.Specialite;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class VilleService {
+public class VilleServiceImpl {
 
     private final VilleRepository villeRepository;
 

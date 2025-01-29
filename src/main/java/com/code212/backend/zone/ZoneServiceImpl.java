@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ZoneService {
+public class ZoneServiceImpl implements IZoneService{
 
     private final ZoneRepository zoneRepository;
 
