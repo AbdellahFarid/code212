@@ -32,7 +32,7 @@ public class Restaurant {
     @CreationTimestamp
     private LocalDateTime dateCreation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST})
     @JoinColumn(name = "zone", nullable = false)
     private Zone zone;
 

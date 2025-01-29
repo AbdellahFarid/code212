@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RepasController {
 
-    private final RepasService repasService;
+    private final IRepasService repasService;
 
     @PostMapping()
     public ResponseEntity<Repas> createRepas(@RequestBody Repas repas){

@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ZoneController {
 
-    private final ZoneService zoneService;
+    private final IZoneService zoneService;
 
     @PostMapping()
     public ResponseEntity<Zone> createZone(@RequestBody Zone zone){

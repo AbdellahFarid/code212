@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RepasServiceImpl {
+public class RepasServiceImpl implements IRepasService{
 
     private final RepasRepository repasRepository;
 

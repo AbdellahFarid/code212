@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SpecialiteServiceImpl {
+public class SpecialiteServiceImpl implements ISpecialiteService{
 
     private final SpecialiteRepository specialiteRepository;
 

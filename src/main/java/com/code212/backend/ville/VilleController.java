@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VilleController {
 
-    private final VilleService villeService;
+    private final IVilleService villeService;
 
     @PostMapping()
     public ResponseEntity<Ville> createVille(@RequestBody Ville ville){

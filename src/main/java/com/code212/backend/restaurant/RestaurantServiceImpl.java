@@ -12,11 +12,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RestaurantServiceImpl {
+public class RestaurantServiceImpl implements IRestaurantService{
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMapper restaurantMapper;
-
     public RestaurantResponse createRestaurant(RestaurantRequest restaurantRequest){
 
         List<Repas> repasList = new ArrayList<>();

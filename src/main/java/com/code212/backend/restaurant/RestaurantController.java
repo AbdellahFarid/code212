@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestaurantController {
 
-    private final RestaurantService restaurantService;
+    private final IRestaurantService restaurantService;
 
     @PostMapping()
     public ResponseEntity<RestaurantResponse> createRestaurant(@RequestBody RestaurantRequest restaurant){

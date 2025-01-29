@@ -1,6 +1,5 @@
 package com.code212.backend.specialite;
 
-import com.code212.backend.repas.Repas;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import java.util.List;
 @RequestMapping("/api/v1/specialite")
 public class SpecialiteController {
 
-    private final SpecialiteService specialiteService;
+    private final ISpecialiteService specialiteService;
 
     @PostMapping()
     public ResponseEntity<Specialite> createSpecialite(@RequestBody Specialite specialite){
